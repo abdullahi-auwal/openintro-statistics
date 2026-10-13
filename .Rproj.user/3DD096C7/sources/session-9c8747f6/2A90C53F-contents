@@ -1,8 +1,8 @@
 # OpenIntro Statistics with R
+
 A hands-on journey through statistics, data analysis, and R programming using **OpenIntro Statistics**.
 This repository documents my progress as I work through the textbook and its accompanying R labs, while also using the datasets and examples to strengthen my practical R skills.
 Rather than only reading the statistical concepts, I am trying to **understand, implement, visualize, and reproduce** them using R.
----
 
 ## Objectives
 
