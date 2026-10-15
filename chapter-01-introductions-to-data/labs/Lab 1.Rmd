@@ -1,0 +1,89 @@
+---
+title: "Lab 1: Intro to R"
+author: "Abdullahi Auwalu"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+```
+
+### Exercise 1
+
+```{r view-girls-counts}
+arbuthnot$girls
+```
+
+
+### Exercise 2
+
+There was a sharp fall in the number of girls baptized in the 1640s-1650s.
+The number began to rise again from the year 1660s onward.
+The number has continued to mostly rise over the years.
+
+```{r trend-girls}
+ggplot(data = arbuthnot, aes(x = year, y = girls)) + geom_line()
+```
+
+
+### Exercise 3
+
+Before the 1660, the trend is appearance of rise in the proportion of boys baptized. This changed in the years following 1660.  
+NB: Within a trend, there are falls and rises. So if I say the trend appears to show rise, that doesn't mean of all the proportions rise over time. Also do note, the boys' proportion is still larger than the girls'. It's the size of the proportion that increase and decrease.
+
+```{r plot-prop-boys-arbuthnot}
+ggplot(data = arbuthnot, aes(x = year, y = boys/(boys + girls))) + geom_line()
+```
+
+
+### Exercise 4
+Present data set info:  
+Rows: 63  
+Columns: 3  
+Variable: year, boys, girls  
+
+```{r dim-present}
+glimpse(present)
+```
+
+
+### Exercise 5
+The magnitudes of the counts aren't similar.  
+For the present's boys, the counts range from 1,211,684 - 2,186,274,  
+while arbuthnot's ranges from 2890 - 8426  
+
+Similar trend within the girls' counts too:  
+present: 1,148,715 - 2,082,052  
+arbuthnot: 2722 - 7779
+
+```{r count-compare}
+present |> summarise(min = min(boys), max = max(boys))
+arbuthnot |> summarise(min = min(boys), max = max(boys))
+
+present |> summarise(min = min(girls), max = max(girls))
+arbuthnot |> summarise(min = min(girls), max = max(girls))
+```
+
+
+### Exercise 6
+
+Arbuthnot's  observation about boys being born in greater proportion that girls
+hold up in the US present's dataset.
+
+```{r plot-prop-boys-present}
+ggplot(data = present, aes(x = year, y = boys/(boys + girls))) + geom_line()
+```
+
+
+### Exercise 7
+
+1961 has the most total number of births in US
+
+```{r find-max-total}
+present <- present |> mutate(total = boys + girls)
+rearrange <- present |> arrange(desc(total))
+View(rearrange)
+```
+
